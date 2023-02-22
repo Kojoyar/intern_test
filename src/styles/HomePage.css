@@ -1,0 +1,47 @@
+.footer {
+    padding-top: 7rem;
+    height: 550px;
+    color: black;
+}
+.footer__block {
+    display: flex; 
+    justify-content: center;
+}
+.footer__input {
+    border-radius: 20px;
+    height: 52px;
+    width: 338px;
+    /* border: 1px solid red; */
+    border: none;
+    margin-left: 1rem;
+    color: white;
+    background-color: black;
+}
+.footer__input::placeholder {
+    padding-left: 10px;
+} 
+form {
+    margin-top: 1rem;
+}
+.card-content-btn {
+    font-family: "Open Sans", sans-serif;
+    width: 17%;
+    height: 38px;
+    border: none;
+    color: black;
+    font-weight: 400;
+    font-size: 10px;
+    background: black;
+    transition-duration: 0.4s;
+    border-radius: 20px;
+    margin-top: 3rem;
+    margin-left: 19.5rem;
+  }
+  .card-content-btn:hover {
+    background-color: rgba(0, 0, 0, 0.576);
+  }
+  .card-content-link {
+    text-decoration: none;
+    color: white;
+    font-family: "Open Sans", sans-serif;
+  }
