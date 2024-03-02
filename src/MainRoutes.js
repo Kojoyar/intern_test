@@ -4,6 +4,10 @@ import LoginPage from './pages/LoginPage'
 import NotFoundPage from './pages/NotFoundPage'
 import RegisterPage from './pages/RegisterPage';
 import { Route, Routes } from 'react-router-dom'
+import EditProductPage from './pages/EditProductPage';
+import ProductDetailsPage from './pages/ProductDetailsPage';
+import AdminPage from './pages/AdminPage';
+import ProductsPage from './pages/ProductsPage';
 
 const MainRoutes = () => {
     const PUBLIC = [
@@ -15,17 +19,37 @@ const MainRoutes = () => {
         {
             link: '/login',
             element: <LoginPage/> ,
-            id: 1
+            id: 2
         },
         {
             link: '/',
             element: <HomePage/>,
-            id: 1
+            id: 3
         },
         {
             link: '*',
             element: <NotFoundPage/>,
-            id: 1
+            id: 4
+        },
+        {
+            link: '/admin',
+            element: <AdminPage/>,
+            id: 5
+        },
+        {
+            link: '/products',
+            element: <ProductsPage/>,
+            id: 6
+        },
+        {
+            link: '/details/:id',
+            element: <ProductDetailsPage/>,
+            id: 7
+        },
+        {
+            link: '/edit/:id',
+            element: <EditProductPage/>,
+            id: 8
         },
     ]
   return (

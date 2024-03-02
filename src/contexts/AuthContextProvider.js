@@ -29,6 +29,7 @@ const AuthContextProvider = ({children}) => {
         } catch(error) {
             console.log(error)
             setError('Error occured!')
+            alert('Error occured!')
         }
     }
 
@@ -51,8 +52,46 @@ const AuthContextProvider = ({children}) => {
         }
     }
 
+    const logout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        setUser('')
+        navigate('/')
+    }
+
+    const checkAuth = async () => {
+        console.log("WORKED");
+        let token = JSON.parse(localStorage.getItem("token"));
+
+        try {
+        const Authorization = `Bearer ${token.access}`;
+
+        let res = await axios.post(`
+            ${API}api/token/refresh/`,
+            { refresh: token.refresh },
+            { headers: { Authorization } }
+        );
+
+        console.log(res); // получаем новый аксес токен
+
+        localStorage.setItem(
+            "token",
+            JSON.stringify({
+            refresh: token.refresh,
+            access: res.data.access,
+            })
+        ); // обновляем рефреш токен по аксес токену
+
+        let username = localStorage.getItem("username");
+        setUser(username); // чтобы при обновлении страницы не сбрасывалось состояние на ''
+        } catch (e) {
+        console.log(e);
+        logout();
+        }
+    };
+
   return (
-    <authContext.Provider value={{user, error, register, login}} >
+    <authContext.Provider value={{user, error, register, login, logout, checkAuth}}>
         {children}
     </authContext.Provider>
   )

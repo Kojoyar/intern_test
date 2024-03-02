@@ -18,14 +18,20 @@ const LoginPage = () => {
       <div className="body">
         <div class='login'>
           <h2 className='reg-title' >Login</h2>
-          <input name='username' placeholder='Username' type='text' onChange={e => setUsername(e.target.value)}  />
-          <input id='pw' name='password' placeholder='Password' type='password' onChange={e => setPassword(e.target.value)} />
-          <input name='email' placeholder='E-Mail Address' type='text'/>
+          <div>
+           <input className='log_inp' name='username' placeholder='Username' type='text' onChange={e => setUsername(e.target.value)}  />
+          </div>
+          <div>
+            <input className='log_inp'id='pw' name='password' placeholder='Password' type='password' onChange={e => setPassword(e.target.value)} />
+          </div>
+          <div>
+           <input className='log_inp' name='email' placeholder='E-Mail Address' type='text'/>
+          </div>
           {/* <div class='agree'>
             <input id='agree' name='agree' type='checkbox'/>
             <label for='agree'></label>Accept rules and conditions
           </div> */}
-          <input onClick={() => login(username, password)} class='animated' type='submit' value='Login'/>
+          <input className='log_btn' onClick={() => login(username, password)} class='animated' type='submit' value='Login'/>
         </div>
       </div>
     </div>

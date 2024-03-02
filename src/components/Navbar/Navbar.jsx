@@ -14,8 +14,18 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContextProvider';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = [
+  {
+    type: 'Users',
+    path: '/products'
+  },
+  {
+    type: 'Add-User',
+    path: '/admin'
+  },
+];
 const settings = [{
   type: 'Register',
   path: '/register'
@@ -56,6 +66,13 @@ function Navbar() {
 
   // custom 
   const navigate = useNavigate()
+  const {user ,logout, checkAuth} = useAuth()
+
+  React.useEffect(() => {
+    if (localStorage.getItem('token')) {
+      checkAuth()
+    }
+  }, [])
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -80,7 +97,7 @@ function Navbar() {
               }}
               onClick={() => navigate('/')}
             >
-              CHAIKA-SHOP
+              CHAIKA-USER
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -113,8 +130,8 @@ function Navbar() {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                  <MenuItem key={page.type} onClick={handleCloseNavMenu}>
+                    <Typography onClick={() => navigate(page.path)} textAlign="center">{page.type}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -124,7 +141,7 @@ function Navbar() {
               variant="h5"
               noWrap
               component="a"
-              href=""
+              onClick={() => navigate('/')}
               sx={{
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
@@ -136,24 +153,24 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              CHAIKA 
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
                 <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
+                  key={page.type}
+                  onClick={() => navigate(page.path)}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  {page}
+                  {page.type}
                 </Button>
               ))}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip title="\">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={user} src="..." />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -177,6 +194,9 @@ function Navbar() {
                     <Typography onClick={() => navigate(setting.path)} textAlign="center">{setting.type}</Typography>
                   </MenuItem>
                 ))}
+                 <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography onClick={logout} textAlign="center">Logout</Typography>
+                  </MenuItem>
               </Menu>
             </Box>
           </Toolbar>

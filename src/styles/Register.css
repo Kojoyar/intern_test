@@ -1,0 +1,19 @@
+.reg_btn {
+    border: none;
+        color: black;
+        padding: 10px 52px;
+        margin-top: 1rem;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+}
+.login {
+    text-align: center;
+}
+.reg_inp {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
